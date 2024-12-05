@@ -1,0 +1,32 @@
+#!/bin/bash                                                                                FASTP_CASSAVA.sh                                                                                             #!/bin/bash
+#SBATCH -p normal
+#SBATCH --job-name=fastp_cassava
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=24G
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+# Load module FastP
+module load fastp/0.20.1
+
+# Define directories
+RAW_DATA_DIR="/projects/large/CIBIG_cassava/FASTQ_DIR"
+CLEANED_DATA_DIR="/projects/large/CIBIG_cassava/FASTP_RESULTS"
+
+# Loop to process all samples
+for SAMPLE in "$RAW_DATA_DIR"/*.fastq.gz; do
+    # Extract the base name
+    BASENAME=$(basename "$SAMPLE" _1.fastq.gz)
+
+    # Define input and output file paths
+    R1="$RAW_DATA_DIR/${BASENAME}_1.fastq.gz"
+    R2="$RAW_DATA_DIR/${BASENAME}_2.fastq.gz"
+    CLEAN_R1="$CLEANED_DATA_DIR/${BASENAME}_clean_1.fastq.gz"
+    CLEAN_R2="$CLEANED_DATA_DIR/${BASENAME}_clean_2.fastq.gz"
+
+    # Run Fastp
+    fastp -i "$R1" -I "$R2" -o "$CLEAN_R1" -O "$CLEAN_R2" \
+          --qualified_quality_phred 30 \
+
+done
