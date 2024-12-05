@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH --job-name=multiqc_cassava
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8G
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+# Load the MultiQC module
+module load multiqc/1.9
+
+# Define directories
+MULTIQCRESULTS_DIR="/home/liby/MULTIQC_RESULTS"
+
+# Run MultiQC on the FastQC results directory
+multiqc /home/liby/FASTQC_RESULTS -o /home/liby/MULTIQC_RESULTS
