@@ -15,4 +15,4 @@ RAW_DATA_DIR="/projects/large/CIBIG_cassava/FASTQ_DIR"
 RESULTS_DIR="/home/liby/FASTQC_RESULTS"
 
 # Run FastQC on the raw data files and output results directly to $RESULTS_DIR
-fastqc "$RAW_DATA_DIR"/*.fq.gz -o "$RESULTS_DIR"
+fastqc "$RAW_DATA_DIR"/* -o "$RESULTS_DIR"
