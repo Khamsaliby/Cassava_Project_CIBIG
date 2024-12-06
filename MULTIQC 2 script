@@ -1,4 +1,4 @@
-MULTI QC 2
+MULTIQC 2
 
 #!/bin/bash
 #SBATCH -p normal
