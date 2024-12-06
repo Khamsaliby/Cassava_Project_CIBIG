@@ -1,0 +1,20 @@
+FAST QC 2
+
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH --job-name=fastqc_cassava
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=24G
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+# Load the FastQC module
+module load FastQC/0.11.9
+
+# Define directories
+CLEANED_DATA_DIR="/projects/large/CIBIG_cassava/FASTP_RESULTS" 
+RESULTS_DIR="/projects/large/CIBIG_cassava/FASTQC_RESULTS_2"
+
+# Run FastQC on the raw data files and output results directly to $RESULTS_DIR
+fastqc "$CLEANED_DATA_DIR"/* -o "$RESULTS_DIR"
