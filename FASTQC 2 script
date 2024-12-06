@@ -1,4 +1,4 @@
-FAST QC 2
+FASTQC 2
 
 #!/bin/bash
 #SBATCH -p normal
